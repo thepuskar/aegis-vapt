@@ -1,0 +1,7 @@
+interface:
+  display_name: "Aegis VAPT"
+  short_description: "Enterprise VAPT and evidence-led security audits"
+  default_prompt: "Use $aegis-vapt to perform an authorized enterprise security review and produce a validated VAPT report."
+
+policy:
+  allow_implicit_invocation: true
