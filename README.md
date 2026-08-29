@@ -44,7 +44,57 @@ aegis-vapt/
 
 ## Installation
 
-### Claude Code
+### Install with the Agent Skills CLI
+
+Install Aegis VAPT directly from GitHub:
+
+```bash
+npx skills add thepuskar/aegis-vapt
+```
+
+The installer detects supported coding agents and lets you choose the installation scope and targets.
+
+Install for Claude Code, Codex, and Cursor explicitly:
+
+```bash
+npx skills add thepuskar/aegis-vapt \
+  -a claude-code \
+  -a codex \
+  -a cursor
+```
+
+Install globally so the skill is available across projects:
+
+```bash
+npx skills add thepuskar/aegis-vapt \
+  -g \
+  -a claude-code \
+  -a codex \
+  -a cursor
+```
+
+Install non-interactively for every detected agent:
+
+```bash
+npx skills add thepuskar/aegis-vapt --all
+```
+
+Manage the installation with:
+
+```bash
+# List installed skills
+npx skills list
+
+# Update Aegis VAPT
+npx skills update aegis-vapt
+
+# Remove Aegis VAPT
+npx skills remove aegis-vapt
+```
+
+### Manual installation
+
+#### Claude Code
 
 Clone or copy the project into your Claude skills directory:
 
@@ -55,7 +105,7 @@ git clone https://github.com/thepuskar/aegis-vapt.git .claude/skills/aegis-vapt
 
 For a global installation, place it in the skills directory used by your Claude Code configuration.
 
-### Codex
+#### Codex
 
 Clone it into your Codex skills directory:
 
@@ -64,7 +114,7 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 git clone https://github.com/thepuskar/aegis-vapt.git "${CODEX_HOME:-$HOME/.codex}/skills/aegis-vapt"
 ```
 
-### Cursor and compatible agents
+#### Cursor and compatible agents
 
 Copy the `aegis-vapt` folder into the agent's supported project or global skills directory. Keep `SKILL.md`, `references/`, and `scripts/` together.
 
