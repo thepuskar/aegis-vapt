@@ -1,18 +1,20 @@
 # Aegis VAPT
 
-An evidence-led enterprise VAPT skill for coding agents. Aegis VAPT combines threat modeling, manual security analysis, framework-aligned coverage, optional OSS tooling, finding validation, remediation guidance, and release-gate reporting.
+An adaptive, evidence-led enterprise VAPT skill for coding agents. Aegis VAPT combines composable assessment profiles, threat and attack-path modeling, manual security analysis, framework-aligned coverage, optional OSS tooling, finding validation, remediation, resilience analysis, and release-gate reporting.
 
-It is designed for authorized assessment of source code, APIs, authentication, authorization, multi-tenant systems, dependencies, cloud infrastructure, containers, and CI/CD.
+It is designed for authorized assessment of enterprise software and platforms across web/API, mobile, desktop, cloud-native, microservice, event-driven, data, AI/agentic, identity, IoT/OT, supply-chain, and operational environments.
 
 ## Capabilities
 
 - Differential, module, repository, incident, remediation, and release-gate reviews
-- OWASP ASVS, Top 10, API Security Top 10, WSTG, CWE, NIST SSDF, CIS, SLSA, and related mappings
-- Authentication, OIDC/OAuth, session, authorization, IDOR, and tenant-isolation analysis
-- API, injection, XSS, SSRF, upload, business-logic, dependency, supply-chain, cloud, container, IaC, and CI/CD testing
+- Composable core, architecture, domain, and assurance overlays
+- OWASP ASVS 5.0.0, API Security 2023, WSTG, MASVS, LLM Top 10 2025, NIST SSDF/CSF/AI RMF, CISA Secure by Design, CIS, SLSA, and related mappings
+- Workforce/customer/workload identity, OIDC/OAuth/SAML/SCIM, PAM, zero-trust, authorization, IDOR, and tenant-isolation analysis
+- Web/API, mobile/desktop, cloud/Kubernetes/serverless, microservice/event, data, AI/agentic, IoT/OT, supply-chain, resilience, and security-operations coverage
+- Domain overlays for SaaS, ERP/HR, finance/payments, healthcare/life sciences, government, retail, education, telecom, industrial, legal, media, travel/logistics, energy/utilities, and custom domains
 - Runtime detection for Strix, Semgrep, CodeQL, Trivy, OSV-Scanner, ZAP, Nuclei, Gitleaks, and other tools
-- Manual validation of scanner findings and explicit false-positive handling
-- Severity, exploitability, confidence, remediation, retest, and release recommendations
+- Manual validation, attack-chain correlation, explicit false-positive handling, and coverage ledgers
+- Severity, exploitability, confidence, blast radius, remediation ownership, retest, residual risk, and release recommendations
 
 ## Project structure
 
@@ -23,13 +25,21 @@ aegis-vapt/
 │   └── openai.yaml
 ├── references/
 │   ├── framework-coverage.md
+│   ├── enterprise-profiling.md
+│   ├── threat-modeling.md
 │   ├── methodology.md
 │   ├── reporting.md
 │   ├── testing-playbooks.md
+│   ├── identity-and-zero-trust.md
+│   ├── cloud-and-platform-security.md
+│   ├── ai-and-agentic-security.md
+│   ├── domain-overlays.md
+│   ├── resilience-and-operations.md
 │   └── tooling.md
 └── scripts/
     ├── repo-context.sh
-    └── security-tooling.sh
+    ├── security-tooling.sh
+    └── validate-skill.sh
 ```
 
 ## Installation
@@ -61,17 +71,18 @@ Copy the `aegis-vapt` folder into the agent's supported project or global skills
 ## Usage
 
 ```text
-Use $aegis-vapt to perform an authorized enterprise security review of this project.
-Validate material findings, identify false positives, and produce a VAPT report.
+Use $aegis-vapt to profile this enterprise system, select the applicable
+architecture, domain, and assurance overlays, validate material attack paths,
+identify false positives and untested areas, and produce a VAPT report.
 Do not modify code.
 ```
 
 For a release gate:
 
 ```text
-Use $aegis-vapt in release-gate mode against the current branch and dev.
-Focus on authentication, authorization, tenant isolation, API exposure,
-dependencies, shared-code blast radius, and regression risk.
+Use $aegis-vapt in high-assurance release-gate mode against the current branch
+and dev. Build the assessment profile from the actual architecture and business
+domain, analyze attack chains and operational recovery, and give a release decision.
 ```
 
 For remediation:
@@ -94,6 +105,7 @@ Run the local inventory helpers with:
 ```bash
 ./scripts/repo-context.sh /path/to/project
 ./scripts/security-tooling.sh
+./scripts/validate-skill.sh
 ```
 
 ## License

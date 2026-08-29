@@ -33,6 +33,12 @@ Load only relevant sections. Each item is an investigation prompt, not automatic
 - Review CSRF, CORS, CSP, frame restrictions, HSTS, content type, referrer, and permissions policy.
 - Treat public build variables/browser storage as attacker-readable; client-side permissions are not authorization.
 
+## Mobile and desktop clients
+
+- Review local secrets/data, platform key stores, backups, screenshots/clipboard, logs, IPC, deep links/protocol handlers, WebViews, certificate validation, update signing, code loading, and device trust assumptions.
+- Treat root/jailbreak/debug/attestation signals as risk inputs, not substitutes for backend authorization.
+- Test offline synchronization, conflict resolution, queued mutations, local database isolation, and account/tenant switching.
+
 ## SSRF, redirects, and outbound requests
 
 - Trace controlled URLs through parsing, redirects, DNS, proxies, and request libraries.
@@ -48,6 +54,12 @@ Load only relevant sections. Each item is an investigation prompt, not automatic
 
 - Model allowed state transitions. Test step skipping, negative/overflow values, duplicates, replay, races, stale approvals, price/status manipulation, and privilege changes.
 - Focus on exports, approvals, payroll, payments, invoices, refunds, invitations, and recovery.
+
+## Integrations and third parties
+
+- Inventory inbound/outbound APIs, webhooks, SFTP/file exchange, email/SMS, identity, payments, analytics, AI/model providers, and marketplace extensions.
+- Verify signing/authentication, replay protection, schema/content validation, credential and tenant isolation, egress restrictions, failure/retry behavior, data minimization, revocation, and vendor compromise blast radius.
+- Do not trust third-party responses more than user input; validate before policy decisions or unsafe sinks.
 
 ## Dependencies and supply chain
 
@@ -66,3 +78,4 @@ Load only relevant sections. Each item is an investigation prompt, not automatic
 - Check logs/errors for credentials, tokens, cookies, PII, financial/health data, paths, queries, and upstream responses.
 - Review audit events for actor, action, target, result, trusted time, correlation, tamper resistance, and retention.
 - Check algorithms, key sizes, modes, randomness, nonce/IV reuse, key separation/rotation/storage, transport validation, and certificate verification.
+- Map data collection, purpose, consent/lawful basis where supplied, access, sharing, residency, retention, deletion, backups, analytics, support, lower environments, and AI use. Flag legal questions for qualified review rather than making conclusions.

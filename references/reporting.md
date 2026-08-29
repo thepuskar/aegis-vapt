@@ -1,14 +1,14 @@
 # Reporting model
 
-Produce a concise developer report by default. Add an executive summary, framework mapping, and release decision for formal or release-gate requests.
+Produce a concise developer report by default. Add an executive summary, assessment profile, architecture/attack paths, framework mapping, operational impact, and release decision for formal or release-gate requests.
 
 ## Ratings
 
 Keep severity, exploitability, and confidence separate.
 
-- **Critical:** system-wide compromise, unauthenticated RCE, broad auth bypass, unrestricted tenant compromise, production-secret compromise, or destructive injection.
-- **High:** account takeover, privilege escalation, sensitive IDOR, serious tenant breach, impactful SSRF, unsafe token validation, or privileged stored XSS.
-- **Medium:** constrained exposure/injection, meaningful CSRF, missing abuse control on a sensitive operation, or material misconfiguration.
+- **Critical:** system/enterprise-wide compromise, unauthenticated RCE, broad identity or tenant bypass, production trust-root compromise, destructive transaction/data manipulation, unsafe critical action, or recovery defeat.
+- **High:** account/workload takeover, privilege escalation, sensitive isolation failure, impactful SSRF/control-plane access, supply-chain compromise path, excessive AI-agent authority, or material operational disruption.
+- **Medium:** constrained exposure/injection, meaningful CSRF, missing abuse control, weak separation of duties, recoverable configuration weakness, or limited AI/data/tool boundary failure.
 - **Low:** limited leakage or hardening weakness with low direct impact.
 - **Informational:** defense-in-depth without demonstrated security impact.
 
@@ -28,6 +28,8 @@ Use CVSS only when requested or expected, including its vector and assumptions.
 **Exploitability:** Easy  
 **Confidence:** Confirmed  
 **Framework mapping:** OWASP API1; CWE-639
+**Assessment profile:** Core + SaaS + multi-tenant
+**Affected business capability:** Invoice confidentiality
 
 ### Affected component
 `path/to/file.ts:line` or authorized endpoint
@@ -44,6 +46,9 @@ Affected assets, users, tenants, and business process.
 ### Root cause
 Missing or misplaced control.
 
+### Attack path and blast radius
+Entry point, boundary crossings, affected identities/tenants/services, and credible chaining.
+
 ### Remediation
 Architecture-aware fix and optional short-term control.
 
@@ -55,7 +60,9 @@ Retain false positives with the evidence and mitigating control. For unvalidated
 
 ## Formal report
 
-Include: executive summary; scope and rules of engagement; architecture and threat model; methodology/tools/framework mapping; coverage and limitations; risk table; confirmed findings; candidates; false positives; positive controls; prioritized remediation; retest results; and residual risk.
+Include: executive summary; scope and rules of engagement; assessment profile/depth; business capabilities and data classes; architecture and threat model; attack paths; methodology/tools/framework versions; coverage ledger and limitations; risk table; confirmed findings; candidates; accepted risk; false positives; positive controls; prioritized remediation by now/next/strategic; operational and recovery observations; retest results; and residual risk.
+
+For each recommendation, identify the control owner class (`product`, `identity`, `platform`, `data`, `security operations`, `vendor`, or `governance`) and whether the fix is preventive, detective, recovery, or compensating.
 
 ## Release recommendation
 
@@ -64,6 +71,6 @@ Include: executive summary; scope and rules of engagement; architecture and thre
 - `CONDITIONAL APPROVAL`: material issues need mitigation, owner, and deadline.
 - `BLOCK RELEASE`: confirmed risk makes release unsafe.
 
-Normally block for a confirmed critical issue, auth bypass, sensitive authorization/tenant bypass, account takeover, RCE, serious injection, active production-secret exposure, or unrestricted sensitive-data leakage. High severity may block based on exposure, exploitability, and impact.
+Normally block for a confirmed critical issue, identity/authorization/tenant bypass, account or control-plane takeover, RCE, serious injection, active production trust-secret exposure, unsafe critical action, unrestricted sensitive-data leakage, compromised build/deployment trust, or absence of credible recovery from a release-introduced destructive risk. High severity may block based on exposure, exploitability, blast radius, detectability, safety, and business impact.
 
 Never call an application “secure” or “compliant.” State what was tested, found, and remains unknown.
